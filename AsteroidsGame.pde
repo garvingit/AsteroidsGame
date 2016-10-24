@@ -9,59 +9,46 @@ public void draw()
   ship.move();
   ship.show();
 }
+public void keyPressed(){
+  if(key == UP){
+    setDirectionX(2);/*-------------------------*/
+  }
+
+}
 class SpaceShip extends Floater  
 {   
   SpaceShip(){
-    corners = 8;
-    int[] xC = {8,3,3,0,0,-10,-10,-10};
-    int[] yC = {0,2,-2,5,-5,0,10,-10};
+    setX(250);
+    setY(250);
+    corners = 3;
+    int[] xC = {-8,16,-8};
+    int[] yC = {-8,0,8};
     xCorners = xC;
     yCorners = yC;
-    setDirectionX(0);
 }
   
 
+  //setters
+  public void setX(int x){myCenterX = x;}  
+   
+  public void setY(int y){myCenterY = y;}   
+   
+  public void setDirectionX(double x){myDirectionX = (double)x;}  
 
-  public void setX(int x)
-  {
-    myCenterX = x;
-  }  
-  public int getX()
-  {
-    return (int)myCenterX;
-  }   
-  public void setY(int y)
-  {
-    myCenterY = y;
-  }   
-  public int getY()
-  {
-    return (int)myCenterY;
-  }   
-  public void setDirectionX(double x)
-  {
-    myDirectionX = x;
-  }   
-  public double getDirectionX()
-  {
-    return myDirectionX;
-  }   
-  public void setDirectionY(double y)
-  {
-    myDirectionY = y;
-  }   
-  public double getDirectionY()
-  {
-    return myDirectionY;
-  }   
-  public void setPointDirection(int degrees)
-  {
-    myPointDirection = degrees;
-  }   
-  public double getPointDirection()
-  {
-    return myPointDirection;
-  } 
+  public void setDirectionY(double y){myDirectionY = (double)y;}  
+
+  public void setPointDirection(int degrees){myPointDirection = degrees;}  
+ 
+  //getters 
+  public int getY(){return (int)myCenterY;}  
+
+  public int getX(){return (int)myCenterX;}
+
+  public double getDirectionX(){return myDirectionX;}  
+
+  public double getDirectionY(){return myDirectionY;}   
+  
+  public double getPointDirection(){return myPointDirection;} 
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
