@@ -2,21 +2,43 @@
 SpaceShip ship = new SpaceShip();
 public void setup() 
 {
+
   size(500,500);
 }
 public void draw() 
 {
+  background(255);
   ship.move();
   ship.show();
 }
 public void keyPressed(){
-  if(key == UP){
-    setDirectionX(2);/*-------------------------*/
+  if (keyCode == UP){
+  ship.accelerate(.10);
+  }
+  if (keyCode == RIGHT){
+  ship.rotate(15);
+  }
+  if((keyCode == UP) && (keyCode == RIGHT)){
+    ship.accelerate(.10);
+    ship.rotate(15);
+
+  }
+  if (keyCode == LEFT){
+  ship.rotate(-15);
+  }
+  //hyperspace
+  if(keyCode == 72){
+    ship.setX(250);
+    ship.setY(250);
+    ship.setDirectionX(0);
+    ship.setDirectionY(0);
+    ship.setPointDirection(0);
   }
 
 }
 class SpaceShip extends Floater  
 {   
+  private double mydX = 0;
   SpaceShip(){
     setX(250);
     setY(250);
@@ -25,6 +47,8 @@ class SpaceShip extends Floater
     int[] yC = {-8,0,8};
     xCorners = xC;
     yCorners = yC;
+    setDirectionX(0);
+    setDirectionY(0);
 }
   
 
