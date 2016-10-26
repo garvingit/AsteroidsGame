@@ -12,34 +12,32 @@ public void draw()
   ship.show();
 }
 public void keyPressed(){
-  if (keyCode == UP){
-  ship.accelerate(.10);
+  //up key "W"
+  if (keyCode == 87 || keyCode == UP){
+  ship.accelerate(.5);
   }
-  if (keyCode == RIGHT){
+  //right key 'D'
+  if (keyCode == 68 || keyCode == RIGHT){
   ship.rotate(15);
   }
-  if((keyCode == UP) && (keyCode == RIGHT)){
-    ship.accelerate(.10);
-    ship.rotate(15);
-
-  }
-  if (keyCode == LEFT){
+  //left key 'A'
+  if (keyCode == 65 || keyCode == LEFT){
   ship.rotate(-15);
   }
   //hyperspace
   if(keyCode == 72){
-    ship.setX(250);
-    ship.setY(250);
+    ship.setX((int)(Math.random()*500));
+    ship.setY((int)(Math.random()*500));
     ship.setDirectionX(0);
     ship.setDirectionY(0);
-    ship.setPointDirection(0);
+    ship.setPointDirection((int)(Math.random()*360));
   }
 
 }
 class SpaceShip extends Floater  
 {   
   private double mydX = 0;
-  SpaceShip(){
+  public SpaceShip(){
     setX(250);
     setY(250);
     corners = 3;
@@ -50,8 +48,6 @@ class SpaceShip extends Floater
     setDirectionX(0);
     setDirectionY(0);
 }
-  
-
   //setters
   public void setX(int x){myCenterX = x;}  
    
@@ -74,6 +70,7 @@ class SpaceShip extends Floater
   
   public double getPointDirection(){return myPointDirection;} 
 }
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
@@ -98,7 +95,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void accelerate (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
+    double dRadians = myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
@@ -149,5 +146,15 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }   
     endShape(CLOSE);  
   }   
+} 
+class star{
+  private int random500;
+  public void star(){
+    random500 = (int)(Math.random()*500);
+
+  }
+  public void show(){
+      ellipse(random500,random500,5,5);
+  }
 } 
 
