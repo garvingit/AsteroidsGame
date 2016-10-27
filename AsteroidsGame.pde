@@ -1,28 +1,37 @@
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
+aStar [] stars;
 public void setup() 
 {
-
   size(500,500);
+  stars = new aStar[100];
+  for(int i = 0; i < stars.length; i++){
+    stars[i] = new aStar();
+  }
 }
 public void draw() 
 {
   background(255);
   ship.move();
   ship.show();
+  for(int i = 0; i< stars.length; i++){
+    stars[i].show();
+  }
+
+  
 }
 public void keyPressed(){
   //up key "W"
   if (keyCode == 87 || keyCode == UP){
-  ship.accelerate(.5);
+  ship.accelerate(.75);
   }
   //right key 'D'
   if (keyCode == 68 || keyCode == RIGHT){
-  ship.rotate(15);
+  ship.rotate(5);
   }
   //left key 'A'
   if (keyCode == 65 || keyCode == LEFT){
-  ship.rotate(-15);
+  ship.rotate(-5);
   }
   //hyperspace
   if(keyCode == 72){
@@ -34,19 +43,32 @@ public void keyPressed(){
   }
 
 }
+class aStar{
+  private int starX, starY, size;
+  public aStar(){
+    starX = (int)(Math.random()*500);
+    starY = (int)(Math.random()*500);
+    size = (int)(Math.random()*4)+1;
+  }
+  public void show(){
+      fill(0);
+      ellipse(starX,starY,size,size);
+  }
+} 
+
+
 class SpaceShip extends Floater  
 {   
-  private double mydX = 0;
   public SpaceShip(){
-    setX(250);
-    setY(250);
+    myCenterX = 250;
+    myCenterY = 250;
     corners = 3;
     int[] xC = {-8,16,-8};
     int[] yC = {-8,0,8};
     xCorners = xC;
     yCorners = yC;
-    setDirectionX(0);
-    setDirectionY(0);
+    myDirectionX=0;
+    myDirectionY=0;
 }
   //setters
   public void setX(int x){myCenterX = x;}  
@@ -147,14 +169,3 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-class star{
-  private int random500;
-  public void star(){
-    random500 = (int)(Math.random()*500);
-
-  }
-  public void show(){
-      ellipse(random500,random500,5,5);
-  }
-} 
-
