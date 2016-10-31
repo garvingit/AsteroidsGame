@@ -1,6 +1,6 @@
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
-aStar [] stars;
+aStar[] stars;
 public void setup() 
 {
   size(500,500);
