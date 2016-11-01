@@ -1,6 +1,7 @@
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
 aStar[] stars;
+asteroids[] ast;
 public void setup() 
 {
   size(500,500);
@@ -8,6 +9,11 @@ public void setup()
   for(int i = 0; i < stars.length; i++){
     stars[i] = new aStar();
   }
+  ast = new asteroids[10];
+  for(int i = 0; i < ast.length; i++){
+    ast[i] = new asteroids();
+  }
+  
 }
 public void draw() 
 {
@@ -16,6 +22,10 @@ public void draw()
   ship.show();
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
+  }
+  for(int i = 0; i < ast.length; i++){
+    ast[i].move();
+    ast[i].show();
   }
 
   
@@ -56,15 +66,14 @@ class aStar{
   }
 } 
 
-
 class SpaceShip extends Floater  
 {   
   public SpaceShip(){
     myCenterX = 250;
     myCenterY = 250;
     corners = 3;
-    int[] xC = {-8,16,-8};
-    int[] yC = {-8,0,8};
+    int[] xC = {-6,12,-6};
+    int[] yC = {-6,0,6};
     xCorners = xC;
     yCorners = yC;
     myDirectionX=0;
@@ -91,6 +100,51 @@ class SpaceShip extends Floater
   public double getDirectionY(){return myDirectionY;}   
   
   public double getPointDirection(){return myPointDirection;} 
+}
+
+class asteroids extends Floater{
+  private int rotSpeed;
+  public asteroids(){
+    rotSpeed = (int)(Math.random()*11)-5;
+    myCenterX = (int)(Math.random()*500);
+    myCenterY = (int)(Math.random()*500);
+    corners = 3;
+    //---------------------------------
+    int[] xC = {0,16,32,32,0,-32,-32,-16};
+    int[] yC = {32,48,0,-16,-32,-48,0,16};
+    xCorners = xC;
+    yCorners = yC;
+    myDirectionX=0;
+    myDirectionY=0;
+    myColor=(#d3d3d3); 
+    
+  }
+  public void move(){
+    rotate(rotSpeed);
+    super.move();
+  }
+  //setters
+  public void setX(int x){myCenterX = x;}  
+   
+  public void setY(int y){myCenterY = y;}   
+   
+  public void setDirectionX(double x){myDirectionX = (double)x;}  
+
+  public void setDirectionY(double y){myDirectionY = (double)y;}  
+
+  public void setPointDirection(int degrees){myPointDirection = degrees;}  
+ 
+  //getters 
+  public int getY(){return (int)myCenterY;}  
+
+  public int getX(){return (int)myCenterX;}
+
+  public double getDirectionX(){return myDirectionX;}  
+
+  public double getDirectionY(){return myDirectionY;}   
+  
+  public double getPointDirection(){return myPointDirection;} 
+
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
