@@ -31,17 +31,23 @@ public void draw()
   
 }
 public void keyPressed(){
-  //up key "W"
-  if (keyCode == 87 || keyCode == UP){
+  //up key "W" accelerate
+  if (keyCode == UP){
   ship.accelerate(.75);
   }
-  //right key 'D'
-  if (keyCode == 68 || keyCode == RIGHT){
+  //right key 'D' right rotate
+  if (keyCode == RIGHT){
   ship.rotate(5);
   }
-  //left key 'A'
-  if (keyCode == 65 || keyCode == LEFT){
+  //left key 'A' left rotate
+  if (keyCode == LEFT){
   ship.rotate(-5);
+  }
+  //decelerate down
+  if(keyCode == DOWN){
+    ship.accelerate(-.75);
+    //-----------------------------------------------------------
+    if(ship.getDirectionX() < 0 || ship.getDirectionY() < 0)
   }
   //hyperspace
   if(keyCode == 72){
@@ -105,17 +111,16 @@ class SpaceShip extends Floater
 class asteroids extends Floater{
   private int rotSpeed;
   public asteroids(){
-    rotSpeed = (int)(Math.random()*11)-5;
+    rotSpeed = (int)(Math.random()*9)-4;
     myCenterX = (int)(Math.random()*500);
     myCenterY = (int)(Math.random()*500);
-    corners = 3;
-    //---------------------------------
-    int[] xC = {0,16,32,32,0,-32,-32,-16};
-    int[] yC = {32,48,0,-16,-32,-48,0,16};
+    corners = 8;
+    int[] xC = {-6,6,12,12,6,-6,-12,-12};
+    int[] yC = {12,12,6,-6,-12,-12,-6,6};
     xCorners = xC;
     yCorners = yC;
-    myDirectionX=0;
-    myDirectionY=0;
+    myDirectionX=Math.random();
+    myDirectionY=Math.random();
     myColor=(#d3d3d3); 
     
   }
