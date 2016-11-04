@@ -45,7 +45,9 @@ public void keyPressed(){
   }
   //decelerate down
   if(keyCode == DOWN){
-    ship.accelerate(-0.75);
+    //ship.setDirectionX(0);
+    //ship.setDirectionY(0);
+    for(int i = getDirectionX();)
   }
   //hyperspace
   if(keyCode == 72){
