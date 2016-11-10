@@ -1,6 +1,11 @@
+// what i want to add?
+
+
+
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
 aStar[] stars;
+ArrayList<asteroids> ast = new ArrayList<asteroids>();
 //asteroids[] ast;
 public void setup() 
 {
@@ -9,8 +14,11 @@ public void setup()
   for(int i = 0; i < stars.length; i++){
     stars[i] = new aStar();
   }
-  ArrayList<asteroids> ast = new ArrayList<asteroids>();
-  
+
+  for(int i = 0; i < 11; i++){
+    ast.add(new asteroids());
+  }
+
 }
 public void draw() 
 {
@@ -21,10 +29,14 @@ public void draw()
     stars[i].show();
   }
   //-----------------------------------------------
-  for(int i = 0; i < ast.length(); i++){
-    ast[i].move();
-    ast[i].show();
+  for(int i = 0; i < ast.size(); i++){
+    ast.get(i).move();
+    ast.get(i).show();
+    if(dist(ship.getX(),ship.getY(),ast.get(i).getX(),ast.get(i).getX()) < 5){
+      ast.get(i).remove();
+    }
   }
+
 
   
 }
