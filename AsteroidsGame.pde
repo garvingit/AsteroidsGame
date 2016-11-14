@@ -14,11 +14,10 @@ public void setup()
   for(int i = 0; i < stars.length; i++){
     stars[i] = new aStar();
   }
-
+  //  ; i< num-1 = #of asteroids;
   for(int i = 0; i < 11; i++){
     ast.add(new asteroids());
   }
-
 }
 public void draw() 
 {
@@ -28,17 +27,19 @@ public void draw()
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
   }
-  //-----------------------------------------------
+  //array for asteroids 
   for(int i = 0; i < ast.size(); i++){
     ast.get(i).move();
     ast.get(i).show();
-    if(dist(ship.getX(),ship.getY(),ast.get(i).getX(),ast.get(i).getX()) < 5){
-      ast.get(i).remove();
+     //ship removes asteroid
+    if(dist(ship.getX(), ship.getY(), ast.get(i).getX(), ast.get(i).getY()) < 20){
+      ast.remove(i);
     }
   }
-
-
-  
+  //------------------------------added way to add more asteroids once one disappears, need to make it appear slower
+  if(ast.size() < 11  ){
+    ast.add(new asteroids());
+  }
 }
 public void keyPressed(){
   //up key "W" accelerate
@@ -55,8 +56,9 @@ public void keyPressed(){
   }
   //decelerate down
   if(keyCode == DOWN){
-    ship.setDirectionX(0);
-    ship.setDirectionY(0);
+    ship.accelerate(.75);
+    //ship.setDirectionX(0);
+    //ship.setDirectionY(0);
   }
   //hyperspace
   if(keyCode == 72){
