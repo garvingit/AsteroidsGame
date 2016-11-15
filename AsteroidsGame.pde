@@ -24,6 +24,7 @@ public void draw()
   background(255);
   ship.move();
   ship.show();
+  //ship.show2();
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
   }
@@ -37,6 +38,7 @@ public void draw()
     }
   }
   //------------------------------added way to add more asteroids once one disappears, need to make it appear slower
+  /*frameRate(60);*/
   if(ast.size() < 11  ){
     ast.add(new asteroids());
   }
@@ -45,6 +47,8 @@ public void keyPressed(){
   //up key "W" accelerate
   if (keyCode == UP){
   ship.accelerate(.75);
+  ship.show2();
+
   }
   //right key 'D' right rotate
   if (keyCode == RIGHT){
@@ -56,9 +60,9 @@ public void keyPressed(){
   }
   //decelerate down
   if(keyCode == DOWN){
-    ship.accelerate(.75);
-    //ship.setDirectionX(0);
-    //ship.setDirectionY(0);
+    ship.accelerate(-0.75);
+    /*ship.setDirectionX(0);
+    ship.setDirectionY(0);*/
   }
   //hyperspace
   if(keyCode == 72){
@@ -96,6 +100,11 @@ class SpaceShip extends Floater
     myDirectionX=0;
     myDirectionY=0;
 }
+//--------------------------------------------------------wtf
+  public void show2(){
+      fill(0,0,255);
+  ellipse(ship.getX()-15*Math.sin(getPointDirection()/Math.TWO_PI),ship.getY(),10,10);
+  }
   //setters
   public void setX(int x){myCenterX = x;}  
    
