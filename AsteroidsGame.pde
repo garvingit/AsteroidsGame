@@ -42,13 +42,15 @@ public void draw()
   if(ast.size() < 11  ){
     ast.add(new asteroids());
   }
+  fill(0);
+  text("mydirectionY: " +(int)ship.getDirectionY(),10,30);
+  text("mydirectionX: " +(int)ship.getDirectionX(),10,10);
 }
 public void keyPressed(){
   //up key "W" accelerate
   if (keyCode == UP){
   ship.accelerate(.75);
-  ship.show2();
-
+  //ship.show2();
   }
   //right key 'D' right rotate
   if (keyCode == RIGHT){
@@ -60,9 +62,13 @@ public void keyPressed(){
   }
   //decelerate down
   if(keyCode == DOWN){
-    ship.accelerate(-0.75);
-    /*ship.setDirectionX(0);
-    ship.setDirectionY(0);*/
+    //ship.accelerate(-0.75);
+    ship.setDirectionX(ship.getDirectionX()-0.1);
+    ship.setDirectionY(ship.getDirectionY()-0.1);
+    if(ship.getDirectionX() > 0 || ship.getDirectionY() > 0){
+      ship.setDirectionY(0);
+      ship.setDirectionX(0);
+    }
   }
   //hyperspace
   if(keyCode == 72){
@@ -103,7 +109,7 @@ class SpaceShip extends Floater
 //--------------------------------------------------------wtf
   public void show2(){
       fill(0,0,255);
-  ellipse(ship.getX()-15*Math.sin(getPointDirection()/Math.TWO_PI),ship.getY(),10,10);
+  ellipse(ship.getY(),ship.getX(),10,10);
   }
   //setters
   public void setX(int x){myCenterX = x;}  
