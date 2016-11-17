@@ -15,13 +15,13 @@ public void setup()
     stars[i] = new aStar();
   }
   //  ; i< num-1 = #of asteroids;
-  for(int i = 0; i < 11; i++){
+  for(int i = 0; i < 100; i++){
     ast.add(new asteroids());
   }
 }
 public void draw() 
 {
-  background(255);
+  background(#514B4B);
   ship.move();
   ship.show();
   //ship.show2();
@@ -39,12 +39,14 @@ public void draw()
   }
   //------------------------------added way to add more asteroids once one disappears, need to make it appear slower
   /*frameRate(60);*/
-  if(ast.size() < 11  ){
+  if(ast.size() < 10){
+    ast.add(new asteroids());
     ast.add(new asteroids());
   }
   fill(0);
   text("mydirectionY: " +(int)ship.getDirectionY(),10,30);
   text("mydirectionX: " +(int)ship.getDirectionX(),10,10);
+  text("asteroids: " + ast.size(),10,50);
 }
 public void keyPressed(){
   //up key "W" accelerate
@@ -88,7 +90,7 @@ class aStar{
     size = (int)(Math.random()*4)+1;
   }
   public void show(){
-      fill(0);
+      fill(255);
       ellipse(starX,starY,size,size);
   }
 } 
@@ -98,13 +100,14 @@ class SpaceShip extends Floater
   public SpaceShip(){
     myCenterX = 250;
     myCenterY = 250;
-    corners = 3;
-    int[] xC = {-6,12,-6};
-    int[] yC = {-6,0,6};
+    corners = 15;
+    int[] xC = {0,-5,-7,-5,0,5,6,11,10,6,6,10,11,6,5};
+    int[] yC = {7,5,0,-5,-7,-5,-4,-3,-2,-1,1,2,3,4,0};
     xCorners = xC;
     yCorners = yC;
     myDirectionX=0;
     myDirectionY=0;
+    myColor=#B1906E ;
 }
 //--------------------------------------------------------wtf
   public void show2(){
