@@ -1,5 +1,5 @@
-// what i want to add?
-
+/* what i want to add?
+pacman*/
 
 
 //your variable declarations here
@@ -15,7 +15,7 @@ public void setup()
     stars[i] = new aStar();
   }
   //  ; i< num-1 = #of asteroids;
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i < 50; i++){
     ast.add(new asteroids());
   }
 }
@@ -101,8 +101,8 @@ class SpaceShip extends Floater
     myCenterX = 250;
     myCenterY = 250;
     corners = 15;
-    int[] xC = {0,-5,-7,-5,0,5,6,11,10,6,6,10,11,6,5};
-    int[] yC = {7,5,0,-5,-7,-5,-4,-3,-2,-1,1,2,3,4,0};
+    int[] xC = {0,-10,-14,-10,0,10,12,22,20,12,12,12,20,22,12,10};
+    int[] yC = {14,10,0,-10,-14,-10,-8,-6,-4,-2,2,4,6,8,10};
     xCorners = xC;
     yCorners = yC;
     myDirectionX=0;
