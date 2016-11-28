@@ -1,5 +1,5 @@
 /* what i want to add?
-pacman*/
+*/
 
 
 //your variable declarations here
@@ -15,25 +15,26 @@ public void setup()
     stars[i] = new aStar();
   }
   //  ; i< num-1 = #of asteroids;
-  for(int i = 0; i < 50; i++){
+  for(int i = 0; i < 25; i++){
     ast.add(new asteroids());
   }
 }
 public void draw() 
 {
   background(#514B4B);
-  ship.move();
-  ship.show();
+
   //ship.show2();
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
   }
+    ship.move();
+  ship.show();
   //array for asteroids 
   for(int i = 0; i < ast.size(); i++){
     ast.get(i).move();
     ast.get(i).show();
      //ship removes asteroid
-    if(dist(ship.getX(), ship.getY(), ast.get(i).getX(), ast.get(i).getY()) < 20){
+    if(dist(ship.getX(), ship.getY(), ast.get(i).getX(), ast.get(i).getY()) < 30){
       ast.remove(i);
     }
   }
@@ -43,10 +44,6 @@ public void draw()
     ast.add(new asteroids());
     ast.add(new asteroids());
   }
-  fill(0);
-  text("mydirectionY: " +(int)ship.getDirectionY(),10,30);
-  text("mydirectionX: " +(int)ship.getDirectionX(),10,10);
-  text("asteroids: " + ast.size(),10,50);
 }
 public void keyPressed(){
   //up key "W" accelerate
@@ -65,12 +62,8 @@ public void keyPressed(){
   //decelerate down
   if(keyCode == DOWN){
     //ship.accelerate(-0.75);
-    ship.setDirectionX(ship.getDirectionX()-0.1);
-    ship.setDirectionY(ship.getDirectionY()-0.1);
-    if(ship.getDirectionX() > 0 || ship.getDirectionY() > 0){
-      ship.setDirectionY(0);
-      ship.setDirectionX(0);
-    }
+    ship.setDirectionY(0);
+    ship.setDirectionX(0);  
   }
   //hyperspace
   if(keyCode == 72){
