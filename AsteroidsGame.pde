@@ -5,6 +5,8 @@
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
 aStar[] stars;
+//-----------------------------------------------
+Bullet one = new Bullet(ship);
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
 //asteroids[] ast;
 public void setup() 
@@ -22,12 +24,12 @@ public void setup()
 public void draw() 
 {
   background(#514B4B);
-
+  one.show();
   //ship.show2();
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
   }
-    ship.move();
+  ship.move();
   ship.show();
   //array for asteroids 
   for(int i = 0; i < ast.size(); i++){
@@ -88,8 +90,7 @@ class aStar{
   }
 } 
 
-class SpaceShip extends Floater  
-{   
+class SpaceShip extends Floater  {   
   public SpaceShip(){
     myCenterX = 250;
     myCenterY = 250;
