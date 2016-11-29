@@ -1,36 +1,41 @@
 /* what i want to add?
-*/
+interface, animation for ship, remove bullet,keyRealease?*/
 
 
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
 aStar[] stars;
 //-----------------------------------------------
-Bullet one = new Bullet(ship);
+ArrayList<Bullet> bull = new ArrayList<Bullet>();
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
-//asteroids[] ast;
-public void setup() 
-{
-  size(500,500);
-  stars = new aStar[100];
-  for(int i = 0; i < stars.length; i++){
-    stars[i] = new aStar();
+
+  public void setup() 
+  {
+    size(500,500);
+    stars = new aStar[100];
+    for(int i = 0; i < stars.length; i++){
+      stars[i] = new aStar();
+    }
+    //asteroids
+    for(int i = 0; i < 25; i++){
+      ast.add(new asteroids());
+    }
   }
-  //  ; i< num-1 = #of asteroids;
-  for(int i = 0; i < 25; i++){
-    ast.add(new asteroids());
-  }
-}
+
 public void draw() 
 {
   background(#514B4B);
-  one.show();
   //ship.show2();
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
   }
   ship.move();
   ship.show();
+  //bullets
+  for(int i = 0; i < bull.size(); i++){
+    bull.get(i).move();
+    bull.get(i).show();
+  }
   //array for asteroids 
   for(int i = 0; i < ast.size(); i++){
     ast.get(i).move();
@@ -41,54 +46,59 @@ public void draw()
     }
   }
   //------------------------------added way to add more asteroids once one disappears, need to make it appear slower
-  /*frameRate(60);*/
-  if(ast.size() < 10){
+  
+  if(ast.size() < 15){
     ast.add(new asteroids());
     ast.add(new asteroids());
   }
 }
-public void keyPressed(){
-  //up key "W" accelerate
-  if (keyCode == UP){
-  ship.accelerate(.75);
-  //ship.show2();
-  }
-  //right key 'D' right rotate
-  if (keyCode == RIGHT){
-  ship.rotate(5);
-  }
-  //left key 'A' left rotate
-  if (keyCode == LEFT){
-  ship.rotate(-5);
-  }
-  //decelerate down
-  if(keyCode == DOWN){
-    //ship.accelerate(-0.75);
-    ship.setDirectionY(0);
-    ship.setDirectionX(0);  
-  }
-  //hyperspace
-  if(keyCode == 72){
-    ship.setX((int)(Math.random()*500));
-    ship.setY((int)(Math.random()*500));
-    ship.setDirectionX(0);
-    ship.setDirectionY(0);
-    ship.setPointDirection((int)(Math.random()*360));
-  }
 
-}
-class aStar{
-  private int starX, starY, size;
-  public aStar(){
-    starX = (int)(Math.random()*500);
-    starY = (int)(Math.random()*500);
-    size = (int)(Math.random()*4)+1;
+  public void keyPressed(){
+    //shoot
+    if(keyCode == 32){
+      bull.add(new Bullet(ship));
+    }
+    //up key "W" accelerate
+    if (keyCode == UP){
+    ship.accelerate(.75);
+    //ellipse((float)(ship.getX()+10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()+10*Math.sin(ship.getPointDirection()*(Math.PI/180))),5,5);
+    }
+    //right key 'D' right rotate
+    if (keyCode == RIGHT){
+    ship.rotate(5);
+    }
+    //left key 'A' left rotate
+    if (keyCode == LEFT){
+    ship.rotate(-5);
+    }
+    //decelerate down
+    if(keyCode == DOWN){
+      //ship.accelerate(-0.75);
+      ship.setDirectionY(0);
+      ship.setDirectionX(0);  
+    }
+    //hyperspace
+    if(keyCode == 72){
+      ship.setX((int)(Math.random()*500));
+      ship.setY((int)(Math.random()*500));
+      ship.setDirectionX(0);
+      ship.setDirectionY(0);
+      ship.setPointDirection((int)(Math.random()*360));
+    }
+
   }
-  public void show(){
-      fill(255);
-      ellipse(starX,starY,size,size);
-  }
-} 
+  class aStar{
+    private int starX, starY, size;
+    public aStar(){
+      starX = (int)(Math.random()*500);
+      starY = (int)(Math.random()*500);
+      size = (int)(Math.random()*4)+1;
+    }
+    public void show(){
+        fill(255);
+        ellipse(starX,starY,size,size);
+    }
+  } 
 
 class SpaceShip extends Floater  {   
   public SpaceShip(){
@@ -105,29 +115,20 @@ class SpaceShip extends Floater  {
 }
 //--------------------------------------------------------wtf
   public void show2(){
-      fill(0,0,255);
+  fill(0,0,255);
   ellipse(ship.getY(),ship.getX(),10,10);
   }
   //setters
-  public void setX(int x){myCenterX = x;}  
-   
-  public void setY(int y){myCenterY = y;}   
-   
-  public void setDirectionX(double x){myDirectionX = (double)x;}  
-
+  public void setX(int x){myCenterX = x;}   
+  public void setY(int y){myCenterY = y;}    
+  public void setDirectionX(double x){myDirectionX = (double)x;} 
   public void setDirectionY(double y){myDirectionY = (double)y;}  
-
   public void setPointDirection(int degrees){myPointDirection = degrees;}  
- 
   //getters 
-  public int getY(){return (int)myCenterY;}  
-
+  public int getY(){return (int)myCenterY;} 
   public int getX(){return (int)myCenterX;}
-
   public double getDirectionX(){return myDirectionX;}  
-
   public double getDirectionY(){return myDirectionY;}   
-  
   public double getPointDirection(){return myPointDirection;} 
 }
 
@@ -153,26 +154,16 @@ class asteroids extends Floater{
   }
   //setters
   public void setX(int x){myCenterX = x;}  
-   
   public void setY(int y){myCenterY = y;}   
-   
-  public void setDirectionX(double x){myDirectionX = (double)x;}  
-
+  public void setDirectionX(double x){myDirectionX = (double)x;} 
   public void setDirectionY(double y){myDirectionY = (double)y;}  
-
   public void setPointDirection(int degrees){myPointDirection = degrees;}  
- 
   //getters 
   public int getY(){return (int)myCenterY;}  
-
   public int getX(){return (int)myCenterX;}
-
   public double getDirectionX(){return myDirectionX;}  
-
   public double getDirectionY(){return myDirectionY;}   
-  
   public double getPointDirection(){return myPointDirection;} 
-
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
