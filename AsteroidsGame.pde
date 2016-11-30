@@ -8,6 +8,7 @@ aStar[] stars;
 //-----------------------------------------------
 ArrayList<Bullet> bull = new ArrayList<Bullet>();
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
+//boolean
 
   public void setup() 
   {
@@ -35,6 +36,11 @@ public void draw()
   for(int i = 0; i < bull.size(); i++){
     bull.get(i).move();
     bull.get(i).show();
+
+    if((bull.get(i).getX() >width) || (bull.get(i).getX()<0) || (bull.get(i).getY() >height) || (bull.get(i).getY() < 0) )
+    {     
+      bull.remove(i); 
+    }    
   }
   //array for asteroids 
   for(int i = 0; i < ast.size(); i++){
@@ -45,7 +51,6 @@ public void draw()
       ast.remove(i);
     }
   }
-  //------------------------------added way to add more asteroids once one disappears, need to make it appear slower
   
   if(ast.size() < 15){
     ast.add(new asteroids());
@@ -53,7 +58,7 @@ public void draw()
   }
 }
 
-  public void keyPressed(){
+/*  public void keyPressed(){
     //shoot
     if(keyCode == 32){
       bull.add(new Bullet(ship));
@@ -85,7 +90,22 @@ public void draw()
       ship.setDirectionY(0);
       ship.setPointDirection((int)(Math.random()*360));
     }
-
+  }*/
+  public void keyPressed(){
+    if(keyCode == 32){ AC = true;}
+    if (keyCode == UP){}
+    if (keyCode == RIGHT){}
+    if (keyCode == LEFT){}
+    if(keyCode == DOWN){}
+    if(keyCode == 72){}
+  }
+  public void keyReleased(){
+    if(keyCode == 32){}
+    if (keyCode == UP){}
+    if (keyCode == RIGHT){}
+    if (keyCode == LEFT){}
+    if(keyCode == DOWN){}
+    if(keyCode == 72){}
   }
   class aStar{
     private int starX, starY, size;

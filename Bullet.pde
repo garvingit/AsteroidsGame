@@ -10,6 +10,12 @@ class Bullet extends Floater{
 		fill(#DBFF46);
 		ellipse((float)(myCenterX+10*Math.cos(myPointDirection*(Math.PI/180))),(float)myCenterY,5,5);
 	}
+	public void move ()  
+    {      
+    
+    myCenterX += myDirectionX;      
+    myCenterY += myDirectionY;    
+  }
 
   public void setX(int x){myCenterX = x;}  
   public void setY(int y){myCenterY = y;}   
