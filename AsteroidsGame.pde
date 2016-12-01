@@ -1,14 +1,13 @@
-/* what i want to add?
-interface, animation for ship, remove bullet,keyRealease?*/
+/* what i want to add?*/
 
 
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
 aStar[] stars;
-//-----------------------------------------------
 ArrayList<Bullet> bull = new ArrayList<Bullet>();
+Bullet justonebull = new Bullet(ship);
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
-//boolean
+boolean isAccel, isDeccel, isRright, isRleft;
 
   public void setup() 
   {
@@ -32,6 +31,10 @@ public void draw()
   }
   ship.move();
   ship.show();
+  if(ship.getDirectionX() > 15)ship.setDirectionX(15);
+  if(ship.getDirectionX() < -15)ship.setDirectionX(-15);
+  if(ship.getDirectionY() > 15)ship.setDirectionY(15);
+  if(ship.getDirectionY() < -15)ship.setDirectionY(-15);
   //bullets
   for(int i = 0; i < bull.size(); i++){
     bull.get(i).move();
@@ -56,56 +59,38 @@ public void draw()
     ast.add(new asteroids());
     ast.add(new asteroids());
   }
+  //booleans
+  if(isAccel == true){
+    ship.accelerate(.15);
+    ellipse((float)(ship.getX()+10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()+10*Math.sin(ship.getPointDirection()*(Math.PI/180))),5,5);
+  }
+  if(isDeccel == true){
+    ship.setDirectionY(0);
+    ship.setDirectionX(0);  
+  }
+  if(isRright == true)ship.rotate(3);
+  if(isRleft == true)ship.rotate(-3);
+
+  text("myPointDirectionX: "+ ship.getDirectionX(), 50,15);
+  text("myPointDirectionY: "+ ship.getDirectionY(), 50,30);
+  justonebull.show();
 }
 
-/*  public void keyPressed(){
-    //shoot
-    if(keyCode == 32){
-      bull.add(new Bullet(ship));
-    }
-    //up key "W" accelerate
-    if (keyCode == UP){
-    ship.accelerate(.75);
-    //ellipse((float)(ship.getX()+10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()+10*Math.sin(ship.getPointDirection()*(Math.PI/180))),5,5);
-    }
-    //right key 'D' right rotate
-    if (keyCode == RIGHT){
-    ship.rotate(5);
-    }
-    //left key 'A' left rotate
-    if (keyCode == LEFT){
-    ship.rotate(-5);
-    }
-    //decelerate down
-    if(keyCode == DOWN){
-      //ship.accelerate(-0.75);
-      ship.setDirectionY(0);
-      ship.setDirectionX(0);  
-    }
-    //hyperspace
-    if(keyCode == 72){
-      ship.setX((int)(Math.random()*500));
-      ship.setY((int)(Math.random()*500));
-      ship.setDirectionX(0);
-      ship.setDirectionY(0);
-      ship.setPointDirection((int)(Math.random()*360));
-    }
-  }*/
   public void keyPressed(){
-    if(keyCode == 32){ AC = true;}
-    if (keyCode == UP){}
-    if (keyCode == RIGHT){}
-    if (keyCode == LEFT){}
-    if(keyCode == DOWN){}
-    if(keyCode == 72){}
+    if(keyCode == 32){bull.add(new Bullet(ship));}
+    if (keyCode == UP){isAccel=true;}
+    if(keyCode == DOWN){isDeccel=true;}
+    if (keyCode == RIGHT){isRright=true;}
+    if (keyCode == LEFT){isRleft=true;}
+
   }
   public void keyReleased(){
-    if(keyCode == 32){}
-    if (keyCode == UP){}
-    if (keyCode == RIGHT){}
-    if (keyCode == LEFT){}
-    if(keyCode == DOWN){}
-    if(keyCode == 72){}
+    //if(keyCode == 32){}
+    if (keyCode == UP){isAccel=false;}
+    if(keyCode == DOWN){isDeccel=false;}
+    if (keyCode == RIGHT){isRright=false;}
+    if (keyCode == LEFT){isRleft=false;}
+    
   }
   class aStar{
     private int starX, starY, size;
