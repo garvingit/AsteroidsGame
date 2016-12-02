@@ -5,9 +5,8 @@
 SpaceShip ship = new SpaceShip();
 aStar[] stars;
 ArrayList<Bullet> bull = new ArrayList<Bullet>();
-Bullet justonebull = new Bullet(ship);
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
-boolean isAccel, isDeccel, isRright, isRleft;
+boolean isAccel, isDeccel, isRright, isRleft, isShoot;
 
   public void setup() 
   {
@@ -31,6 +30,7 @@ public void draw()
   }
   ship.move();
   ship.show();
+  //ships max speed
   if(ship.getDirectionX() > 15)ship.setDirectionX(15);
   if(ship.getDirectionX() < -15)ship.setDirectionX(-15);
   if(ship.getDirectionY() > 15)ship.setDirectionY(15);
@@ -54,10 +54,19 @@ public void draw()
       ast.remove(i);
     }
   }
-  
   if(ast.size() < 15){
     ast.add(new asteroids());
     ast.add(new asteroids());
+  }
+  //collision between ast and bull
+  for(int a = 0; a< ast.size(); a++){
+    for(int b = 0; b<bull.size(); b++){
+      if(dist(bull.get(b).getX(), bull.get(b).getY(), ast.get(a).getX(), ast.get(a).getY()) < 30){
+      ast.remove(a);
+      bull.remove(b);
+      break;
+    }
+    }
   }
   //booleans
   if(isAccel == true){
@@ -68,28 +77,36 @@ public void draw()
     ship.setDirectionY(0);
     ship.setDirectionX(0);  
   }
-  if(isRright == true)ship.rotate(3);
+  if(isRright == true)ship.rotate(225);
   if(isRleft == true)ship.rotate(-3);
+  if(isShoot == true)bull.add(new Bullet(ship));
 
   text("myPointDirectionX: "+ ship.getDirectionX(), 50,15);
   text("myPointDirectionY: "+ ship.getDirectionY(), 50,30);
-  justonebull.show();
+  
 }
 
   public void keyPressed(){
-    if(keyCode == 32){bull.add(new Bullet(ship));}
-    if (keyCode == UP){isAccel=true;}
+    if(keyCode == 32){isShoot=true;}
+    if(keyCode == UP){isAccel=true;}
     if(keyCode == DOWN){isDeccel=true;}
-    if (keyCode == RIGHT){isRright=true;}
-    if (keyCode == LEFT){isRleft=true;}
+    if(keyCode == RIGHT){isRright=true;}
+    if(keyCode == LEFT){isRleft=true;}
+    if(keyCode == 72){
+      ship.setX((int)(Math.random()*480)+10);
+      ship.setY((int)(Math.random()*480)+10);
+      ship.setDirectionX(0);
+      ship.setDirectionY(0);
+      ship.setPointDirection((int)(Math.random()*360));
+    }
 
   }
   public void keyReleased(){
-    //if(keyCode == 32){}
-    if (keyCode == UP){isAccel=false;}
+    if(keyCode == 32){isShoot=false;}    
+    if(keyCode == UP){isAccel=false;}
     if(keyCode == DOWN){isDeccel=false;}
-    if (keyCode == RIGHT){isRright=false;}
-    if (keyCode == LEFT){isRleft=false;}
+    if(keyCode == RIGHT){isRright=false;}
+    if(keyCode == LEFT){isRleft=false;}
     
   }
   class aStar{
