@@ -8,7 +8,7 @@ class Bullet extends Floater{
 	}
 	public void show(){
 		fill(#DBFF46);
-		ellipse((float)(myCenterX+10*Math.cos(myPointDirection*(Math.PI/180))),(float)(myCenterY+13*Math.sin(myPointDirection*(Math.PI/180))),5,5);
+		rect((float)(myCenterX+10*Math.cos(myPointDirection*(Math.PI/180))),(float)(myCenterY+13*Math.sin(myPointDirection*(Math.PI/180))),5,5);
 	}
 	public void move ()  
     {      

@@ -1,4 +1,8 @@
-/* what i want to add?*/
+/* what i want to add?
+add lives and score
+add powerups
+change ship design
+maybe start and end*/
 
 
 //your variable declarations here
@@ -99,8 +103,9 @@ public void draw()
       ship.setDirectionY(0);
       ship.setPointDirection((int)(Math.random()*360));
     }
-
   }
+
+  //public void keyTyped() {}
   public void keyReleased(){
     if(keyCode == 32){isShoot=false;}    
     if(keyCode == UP){isAccel=false;}
