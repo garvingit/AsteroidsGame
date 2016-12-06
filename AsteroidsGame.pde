@@ -11,7 +11,11 @@ aStar[] stars;
 ArrayList<Bullet> bull = new ArrayList<Bullet>();
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
 boolean isAccel, isDeccel, isRright, isRleft, isShoot;
-
+/*int livesCount = 3;
+hLives life1 = new hLives();
+hLives life1 = new hLives();
+hLives life1 = new hLives();
+*/
   public void setup() 
   {
     size(500,500);
@@ -81,7 +85,7 @@ public void draw()
     ship.setDirectionY(0);
     ship.setDirectionX(0);  
   }
-  if(isRright == true)ship.rotate(225);
+  if(isRright == true)ship.rotate(3);
   if(isRleft == true)ship.rotate(-3);
   if(isShoot == true)bull.add(new Bullet(ship));
 
@@ -126,6 +130,17 @@ public void draw()
         ellipse(starX,starY,size,size);
     }
   } 
+/*class hLives{
+  private float myX,myY;
+  public hLives(float x, float y){
+    myX = x;
+    myY = y;
+  }
+  public void show(){
+    fill(255);
+    ellipse(myX,myY,10,10);
+  }
+}*/
 
 class SpaceShip extends Floater  {   
   public SpaceShip(){

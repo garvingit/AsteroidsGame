@@ -8,7 +8,8 @@ class Bullet extends Floater{
 	}
 	public void show(){
 		fill(#DBFF46);
-		rect((float)(myCenterX+10*Math.cos(myPointDirection*(Math.PI/180))),(float)(myCenterY+13*Math.sin(myPointDirection*(Math.PI/180))),5,5);
+    line((float)myCenterX,(float)myCenterY,(float)myCenterX+10,(float)myCenterY+10);
+		//line((float)(myCenterX+15*Math.cos(myPointDirection*(Math.PI/180))),(float)(myCenterY+20*Math.sin(myPointDirection*(Math.PI/180))),(float)myCenterX,(float)myCenterY);
 	}
 	public void move ()  
     {      
