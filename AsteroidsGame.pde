@@ -11,20 +11,17 @@ aStar[] stars;
 ArrayList<Bullet> bull = new ArrayList<Bullet>();
 ArrayList<asteroids> ast = new ArrayList<asteroids>();
 boolean isAccel, isDeccel, isRright, isRleft, isShoot;
-/*int livesCount = 3;
-hLives life1 = new hLives();
-hLives life1 = new hLives();
-hLives life1 = new hLives();
-*/
+int scoreCount = 0;
+
   public void setup() 
   {
-    size(500,500);
-    stars = new aStar[100];
+    size(1000,700);
+    stars = new aStar[200];
     for(int i = 0; i < stars.length; i++){
       stars[i] = new aStar();
     }
     //asteroids
-    for(int i = 0; i < 25; i++){
+    for(int i = 0; i < 50; i++){
       ast.add(new asteroids());
     }
   }
@@ -37,7 +34,9 @@ public void draw()
     stars[i].show();
   }
   ship.move();
+  ship.show2();
   ship.show();
+  
   //ships max speed
   if(ship.getDirectionX() > 15)ship.setDirectionX(15);
   if(ship.getDirectionX() < -15)ship.setDirectionX(-15);
@@ -60,6 +59,7 @@ public void draw()
      //ship removes asteroid
     if(dist(ship.getX(), ship.getY(), ast.get(i).getX(), ast.get(i).getY()) < 30){
       ast.remove(i);
+      scoreCount+=10;
     }
   }
   if(ast.size() < 15){
@@ -72,6 +72,7 @@ public void draw()
       if(dist(bull.get(b).getX(), bull.get(b).getY(), ast.get(a).getX(), ast.get(a).getY()) < 30){
       ast.remove(a);
       bull.remove(b);
+      scoreCount+=10;
       break;
     }
     }
@@ -87,15 +88,14 @@ public void draw()
   }
   if(isRright == true)ship.rotate(3);
   if(isRleft == true)ship.rotate(-3);
-  if(isShoot == true)bull.add(new Bullet(ship));
 
-  text("myPointDirectionX: "+ ship.getDirectionX(), 50,15);
+  text("Score: "+ scoreCount, 50,15);
   text("myPointDirectionY: "+ ship.getDirectionY(), 50,30);
   
 }
 
   public void keyPressed(){
-    if(keyCode == 32){isShoot=true;}
+    if(keyCode == 32){bull.add(new Bullet(ship));}
     if(keyCode == UP){isAccel=true;}
     if(keyCode == DOWN){isDeccel=true;}
     if(keyCode == RIGHT){isRright=true;}
@@ -111,7 +111,6 @@ public void draw()
 
   //public void keyTyped() {}
   public void keyReleased(){
-    if(keyCode == 32){isShoot=false;}    
     if(keyCode == UP){isAccel=false;}
     if(keyCode == DOWN){isDeccel=false;}
     if(keyCode == RIGHT){isRright=false;}
@@ -121,8 +120,8 @@ public void draw()
   class aStar{
     private int starX, starY, size;
     public aStar(){
-      starX = (int)(Math.random()*500);
-      starY = (int)(Math.random()*500);
+      starX = (int)(Math.random()*1000);
+      starY = (int)(Math.random()*700);
       size = (int)(Math.random()*4)+1;
     }
     public void show(){
@@ -130,19 +129,8 @@ public void draw()
         ellipse(starX,starY,size,size);
     }
   } 
-/*class hLives{
-  private float myX,myY;
-  public hLives(float x, float y){
-    myX = x;
-    myY = y;
-  }
-  public void show(){
-    fill(255);
-    ellipse(myX,myY,10,10);
-  }
-}*/
 
-class SpaceShip extends Floater  {   
+class SpaceShip extends Floater {   
   public SpaceShip(){
     myCenterX = 250;
     myCenterY = 250;
@@ -158,7 +146,7 @@ class SpaceShip extends Floater  {
 //--------------------------------------------------------wtf
   public void show2(){
   fill(0,0,255);
-  ellipse(ship.getY(),ship.getX(),10,10);
+  ellipse(ship.getY(),ship.getX(),20,20);
   }
   //setters
   public void setX(int x){myCenterX = x;}   
@@ -178,8 +166,8 @@ class asteroids extends Floater{
   private int rotSpeed;
   public asteroids(){
     rotSpeed = (int)(Math.random()*9)-4;
-    myCenterX = (int)(Math.random()*500);
-    myCenterY = (int)(Math.random()*500);
+    myCenterX = (int)(Math.random()*1000);
+    myCenterY = (int)(Math.random()*700);
     corners = 8;
     int[] xC = {-6,6,12,12,6,-6,-12,-12};
     int[] yC = {12,12,6,-6,-12,-12,-6,6};
