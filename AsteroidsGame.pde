@@ -29,12 +29,14 @@ int scoreCount = 0;
 public void draw() 
 {
   background(#514B4B);
-  //ship.show2();
   for(int i = 0; i< stars.length; i++){
     stars[i].show();
   }
+  if(isAccel == true){
+    ship.accelerate(.15);
+    ship.show2();
+  }
   ship.move();
-  ship.show2();
   ship.show();
   
   //ships max speed
@@ -78,10 +80,7 @@ public void draw()
     }
   }
   //booleans
-  if(isAccel == true){
-    ship.accelerate(.15);
-    ellipse((float)(ship.getX()+10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()+10*Math.sin(ship.getPointDirection()*(Math.PI/180))),5,5);
-  }
+
   if(isDeccel == true){
     ship.setDirectionY(0);
     ship.setDirectionX(0);  
@@ -101,8 +100,8 @@ public void draw()
     if(keyCode == RIGHT){isRright=true;}
     if(keyCode == LEFT){isRleft=true;}
     if(keyCode == 72){
-      ship.setX((int)(Math.random()*480)+10);
-      ship.setY((int)(Math.random()*480)+10);
+      ship.setX((int)(Math.random()*980)+10);
+      ship.setY((int)(Math.random()*680)+10);
       ship.setDirectionX(0);
       ship.setDirectionY(0);
       ship.setPointDirection((int)(Math.random()*360));
@@ -132,8 +131,8 @@ public void draw()
 
 class SpaceShip extends Floater {   
   public SpaceShip(){
-    myCenterX = 250;
-    myCenterY = 250;
+    myCenterX = 500;
+    myCenterY = 750;
     corners = 15;
     int[] xC = {0,-10,-14,-10,0,10,12,22,20,12,12,12,20,22,12,10};
     int[] yC = {14,10,0,-10,-14,-10,-8,-6,-4,-2,2,4,6,8,10};
@@ -143,10 +142,14 @@ class SpaceShip extends Floater {
     myDirectionY=0;
     myColor=#B1906E ;
 }
-//--------------------------------------------------------wtf
   public void show2(){
-  fill(0,0,255);
-  ellipse(ship.getY(),ship.getX(),20,20);
+  noStroke();
+  fill(#4169e1);
+  ellipse((float)(ship.getX()-10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()-10*Math.sin(ship.getPointDirection()*(Math.PI/180))),20,20);
+  }
+  public void show(){
+    stroke(255);
+    super.show();
   }
   //setters
   public void setX(int x){myCenterX = x;}   

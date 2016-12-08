@@ -7,12 +7,13 @@ class Bullet extends Floater{
 		myDirectionY = 10* Math.sin(myPointDirection*(Math.PI/180)) + ship.getDirectionY();
 	}
 	public void show(){
-		fill(#DBFF46);
-    ellipse((float)(myCenterX+10*Math.cos(myPointDirection*(Math.PI/180))),(float)(myCenterY+10*Math.sin(myPointDirection*(Math.PI/180))),5,5);
+    stroke(255);
+		fill(#ff0000);
+    ellipse((float)(myCenterX+10*Math.cos(myPointDirection*(Math.PI/180))),(float)(myCenterY+10*Math.sin(myPointDirection*(Math.PI/180))),10,10);
 		
 	}
 	public void move()  
-    {      
+  {      
     myCenterX += myDirectionX;      
     myCenterY += myDirectionY;    
   }
