@@ -1,9 +1,3 @@
-/* what i want to add?
-add lives and score
-add powerups
-change ship design
-maybe start and end*/
-
 
 //your variable declarations here
 SpaceShip ship = new SpaceShip();
@@ -87,14 +81,21 @@ public void draw()
   }
   if(isRright == true)ship.rotate(3);
   if(isRleft == true)ship.rotate(-3);
-
-  text("Score: "+ scoreCount, 50,15);
-  text("myPointDirectionY: "+ ship.getDirectionY(), 50,30);
+  
+  fill(0);
+  textAlign(LEFT);
+  textSize(30);
+  text("Score: "+ scoreCount, 50,30);
   
 }
 
   public void keyPressed(){
-    if(keyCode == 32){bull.add(new Bullet(ship));}
+    if(keyCode == 32){
+    bull.add(new Bullet(ship));
+    bull.add(new Bullet(ship));
+    bull.add(new Bullet(ship));
+    bull.add(new Bullet(ship));
+    }
     if(keyCode == UP){isAccel=true;}
     if(keyCode == DOWN){isDeccel=true;}
     if(keyCode == RIGHT){isRright=true;}
@@ -132,7 +133,7 @@ public void draw()
 class SpaceShip extends Floater {   
   public SpaceShip(){
     myCenterX = 500;
-    myCenterY = 750;
+    myCenterY = 350;
     corners = 15;
     int[] xC = {0,-10,-14,-10,0,10,12,22,20,12,12,12,20,22,12,10};
     int[] yC = {14,10,0,-10,-14,-10,-8,-6,-4,-2,2,4,6,8,10};
@@ -144,8 +145,8 @@ class SpaceShip extends Floater {
 }
   public void show2(){
   noStroke();
-  fill(#4169e1);
-  ellipse((float)(ship.getX()-10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()-10*Math.sin(ship.getPointDirection()*(Math.PI/180))),20,20);
+  fill(#0099e6);
+  ellipse((float)(ship.getX()-10*Math.cos(ship.getPointDirection()*(Math.PI/180))),(float)(ship.getY()-10*Math.sin(ship.getPointDirection()*(Math.PI/180))),15,15);
   }
   public void show(){
     stroke(255);
